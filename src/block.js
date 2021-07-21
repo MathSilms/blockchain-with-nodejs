@@ -22,6 +22,7 @@ class Block {
         return new this('Genesis time', '_-_-_-_-_', 'JDFINM495FHDF49384F',[]);
     }
 
+    // cria um novo bloco
     static mineBlock(lastBlock, data){
         const timestamp = Date.now();
         const lastHash = lastBlock.hash;
@@ -31,6 +32,7 @@ class Block {
 
     }
 
+    // função para criar o hash
     static hash(timestamp, lastHash, data){
         return SHA256(`${timestamp}${lastHash}${data}`).toString();
     }
