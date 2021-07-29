@@ -7,8 +7,9 @@ let block1 = Block.mineBlock(Block.genesis(), '500');
 let block2 = Block.mineBlock(block1, '100');
 let block3 = Block.mineBlock(block2, '2030');
 
-let blockchain = new Blockchain(block1);
+let blockchain = new Blockchain(Block.genesis());
 
+blockchain.addBlock(block1);
 blockchain.addBlock(block2);
 blockchain.addBlock(block3);
 
