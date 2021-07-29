@@ -5,15 +5,15 @@
 
 ## O que é blockchain ? 
 
-blockchain é um sistema que permite rastrear, o enviar e receber alguns tipos de dados pela internet. São pedaços de código gerados online que carregam informações, semelhante a blocos. Cada bloco é formado por si, e pelo anterior. Dessa forma permanecem conectados. Por isso o nome blockchain( corrente de blocos ).
+blockchain é um sistema que permite rastrear, o enviar e receber alguns tipos de dados pela internet. São pedaços de código gerados online que carregam informações, semelhante a blocos. Cada bloco é formado por um conjunto de dados listados a baixo na aba *composição do bloco*. O fato de um bloco possuir o hash do bloco anterior, faz com que todos estejam ligados entre si, por isso o nome blockchain( corrente de blocos ).
 
 ## Segurança
 
-Os dados desses blocos possuem um código complexo de letras e números, o que garante uma segurança maior.
+Os dados desses blocos são criptografados para garantir a segurança dos mesmos, dando origem ao Hash ( definição na aba abaixo ).
 
-Outro fator importante é o fato de cada bloco possuir o seu código e o código do anterior. Caso haja uma tentativa de quebrar esse código, teria que ser decodificado não apenas um, mas os dois blocos.
+Outra coisa importante é o fato de cada bloco possuir o seu código e o código do anterior. Caso haja uma tentativa de quebrar esse código, teria que ser decodificado não apenas um, mas os dois blocos ( no caso de uma rede com um considerável tempo de existência, pense como isso seria difícil ).
 
-A blockchain não possuiu dono, mas possui um registro público que pode ser acessado por qualquer um. Não é possível ver o conteúdo, ou seja, os dados codificados.
+A blockchain não possuiu um dono específico, mas possui um registro público que pode ser acessado por qualquer um. Algumas informações não terão como serem verificadas, já que foram criptografadas.
 
 # Composição do bloco 
 
@@ -23,11 +23,11 @@ Data de quando o bloco foi criado.
 
 ## Hash
 
- É uma operação criptográfica que gera identificadores únicos e irrepetíveis a partir de uma determinada informação
+ É uma operação criptográfica que gera identificadores únicos e irrepetíveis a partir de uma determinada informação. O hash é composto por lastHash ( definição abaixo ), timestamp e os dados do atual bloco.
  
 ## lastHash
 
-Hash do bloco anterior. É a parte chain da blockchain
+Hash do bloco anterior que vai ser utilizado para criar o hash do bloco atual.
 
 ## Dados
 
