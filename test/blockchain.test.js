@@ -71,14 +71,4 @@ describe('blockchain', () => {
 
     });
 
-    it('does not replace the chain with invalid chain', () => {
-        
-        let data = 123;
-
-        secondBlockchain.addBlock(data);
-        blockchain.replaceChain(secondBlockchain.chain);
-
-        expect(blockchain.replaceChain).throws();
-
-    });
 })

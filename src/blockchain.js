@@ -13,9 +13,10 @@ class Blockchain {
         this.chain.push(newBlock);
         return newBlock;
     }
-    // método para validar qual corrente vai ser utilizada na blockchain
+    // método para validar se corrente vai ser utilizada na blockchain
     isValidChain(chain) {
 
+        // valida se o primeiro bloco da corrente é igual ao bloco genesis (se não for igual, a corrente não é valida).
         if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
             return false;
 

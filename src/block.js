@@ -36,7 +36,7 @@ class Block {
     static hash(timestamp, lastHash, data) {
         return SHA256(`${timestamp}${lastHash}${data}`).toString();
     }
-    // método bem similar á função hash, criado apra gerar validar um hash corrompido
+    // método bem similar á função hash, criado para validar um hash corrompido
     static blockHash(block) {
 
         const { timestamp, lastHash, data } = block;
