@@ -12,6 +12,7 @@
     "jest": "^27.0.6"
   },
   "scripts": {
-    "test": "jest --watchALL"
+    "test": "jest --watchALL",
+    "dev":"node src/teste.js"
   }
 }
