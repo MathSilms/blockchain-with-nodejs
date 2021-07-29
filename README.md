@@ -24,6 +24,7 @@ Data de quando o bloco foi criado.
 ## Hash
 
  É uma operação criptográfica que gera identificadores únicos e irrepetíveis a partir de uma determinada informação
+ 
 ## lastHash
 
 Hash do bloco anterior. É a parte chain da blockchain
@@ -32,11 +33,59 @@ Hash do bloco anterior. É a parte chain da blockchain
 
 Os dados são o conteudo contido no bloco, geralmente uma transação. Esses dados são criptografados através do hash.
 
-## Instalação
+# Descrição dos métodos do bloco
 
-Baixe ou clone o repositório para ter acesso ao código e desenvolver.
+## genesis
 
-no seu editor de código preferencial, abra o terminal e digite:
+Método utilizado para gerar o bloco genesis.
+
+- O bloco genesis é o primeiro bloco presente em uma blockchain. Para criar ele, utilizamos dados fakes e aleatórios com o intuito de apenas criar um bloco mesmo, já que no começo não temos nenhum dado para validar.
+ Como todo bloco gerado precisa do hash do bloco anterior, precisamos do genesis para que os outros funcionem corretamente. ( o bloco genesis possui hash aleatório também, feito apenas para dar inicio á corrente ).
+ 
+ obs.: A blockchain de fato só começa a partir do segundo bloco.
+
+## mineBlock
+
+Método utilizado para criar um novo bloco.
+
+## hash
+
+Método que cria o hash do bloco utilizando o timestamp, lastHash e os dados presentes no bloco.
+
+## blockHash
+
+Método utilizado para criar um novo hash, baseado nos dados do bloco atual.
+
+- O blockHash recebe o bloco atual, pega todos os dados dentro dele e cria um novo hash. A finalidade dessa função na verdade é comparar o novo hash criado com o hash atual do bloco. Se tudo ocorrer bem, os hash serão identicos ( já que os dados utilizados nos dois são idênticos ). O ponto é que, se os dados não forem idênticos, identificamos que o bloco pode ter sido corrompido.
+
+
+
+# Descrição dos métodos da blockchain
+
+## addBlock
+
+Método utilizado para adicionar novos blocos na corrente ( chain ).
+
+## isValidChain
+
+Método utilizado para validar se a corrente pode ser adicionada na blockchain ou não.
+deve seguir essas regras de validação :
+
+- validar o bloco genesis : se o primeiro bloco da corrente não for igual ao bloco genesis, então a corrente não é valida e deve ser descartada
+- validar o hash do bloco : 
+
+  * Se o lastHash ( hash do bloco anterior PRESENTE NO BLOCO ATUAL ) for diferente do hash do BLOCO ANTERIOR, ou seja, se tiver       alguma divergência nos hashs dos blocos a corrente não é valida.
+  * Se o hash ( bloco atual ) for diferente de uma nova versão do proprio hash( ele não é igual a uma nova versão dele mesmo ), significa que em um determinado momento ele foi corrompido. Nesses casos a corrente também não é valida.
+
+obs.: Esse conceito pode ser um pouco difícil de assimilar no começo, tente ler e interpretar o código em conjunto para que compreenda como funciona esse processo de validação ( tem comentários no código também para facilitar ;) )
+
+## replaceChain
+
+Método utilizado para validar um fork de uma corrente e caso seja válido, ele substitui a corrente atual pelo fork.
+as regras para esse replace são :
+
+- A nova corrrente ( fork ) deve ser MAIOR que a corrente atual, caso contrário esse fork não assume como corrente atual.
+- A nova corrente deve passar pelo método *isValidChain* e se não for validado por todas as regras desse método, o fork não assume como corrente atual
 
 ### NPM
 
@@ -53,6 +102,7 @@ yarn install
 essa ação irá instalar os seguintes módulos:
 
 "crypto-js": "^4.0.0"
+"jest": "^27.0.6"
 
 ## Configuração para Desenvolvimento
 
@@ -69,25 +119,20 @@ npm dev
 yarn dev
 ```
 
-no estado atual, aparecerá no seu terminal dois console.log(). Um true e um false
+o script de desenvolvimento vai rodar o arquivo teste.js, que vai simular o funcionamento da blockchain e printar no console para verificar os seguintes itens :
 
-O true é o retorno da validação do bloco como positivo, indicado que a operação foi bem sucedida e não ouve problemas.
+- bloco genesis
+- primeiro bloco da corrente ( depois do genesis )
+- array de blocos com o primeiro, segundo e terceiro bloco da blockchain
+- a corrente com todos os blocos já dentro dela
 
-após esse evento, foi simulado um ataque malicioso por algum indivíduo. Depois do ataque ocorrido o bloco é verificado de novo, só que desta vez, como foi violado, a operação vai retornar false e o bloco não vai ser validado na rede e ganhar seu registro.
+teremos após esses itens, a simulação de erros:
+
+- erro de corrente com tamanho que não atende aos requisitos para virar a corrente principal
+- erro de corrente corrompida, que não passou no processo de validação
 
 ![](./return.png) 
 
-deixei um if, com as duas condições( com ataque e sem ataque), caso queira testar. Se quiser remover o ataque, simplesmente remova a linha:
-
-```sh
-blockchain.blocks[1].data.amount = 30000
-```
-
-alterar o amount de 30000 para 4 também vai obter o mesmo resultado.
-
-
-
 qualquer duvida ou sugestão:
 
-
-Matheus de Oliveira Mendonça – [@MathSilms](https://www.linkedin.com/in/mathsilms/) – Mateheusoliver@gmail.com
+Matheus de Oliveira Mendonça – [@MathSilms](https://www.linkedin.com/in/mathsilms/) – mateheusoliver@gmail.com
