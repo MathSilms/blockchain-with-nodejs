@@ -1,5 +1,5 @@
 # Blockchain-with-javascript
-> Implementação do conceito de blockchain com javascript
+> Implementação do conceito de blockchain com node.js
              
 ![width:200px](block.png)                                     
 
